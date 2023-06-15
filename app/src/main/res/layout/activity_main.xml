@@ -102,13 +102,58 @@
         android:text="Contornos" />
 
     <Button
-        android:id="@+id/btnRotar"
+        android:id="@+id/colorButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="163dp"
+        android:layout_marginEnd="128dp"
         android:layout_marginBottom="56dp"
+        android:onClick="objetosRed"
+        android:text="ObAzules" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="280dp"
+        android:layout_marginBottom="300dp"
+        android:onClick="objetosGreen"
+        android:text="ObVerdes" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="312dp"
+        android:onClick="objetosBlue"
+        android:text="ObRojos" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="30dp"
+        android:onClick="pantalla_2"
+        android:text="Ver mas"
+        app:backgroundTint="@android:color/holo_red_light" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="246dp"
         android:onClick="rotarImagen"
         android:text="Rotar" />
 
