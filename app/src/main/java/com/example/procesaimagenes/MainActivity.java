@@ -1,17 +1,12 @@
 package com.example.procesaimagenes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -23,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
@@ -31,7 +25,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
-import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
@@ -39,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     Button select,camara,btnGray;
     ImageView imageView;
     Bitmap bitmap;
@@ -103,10 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 // Convertir el bitmap a una matriz de OpenCV
                 Utils.bitmapToMat(bitmap,mat);
 
-                /*
-                Imgproc.cvtColor(mat,matGray,Imgproc.COLOR_RGB2BGR);
-                Utils.matToBitmap(mat,bitmap);
-                imageGray.setImageBitmap(bitmap);*/
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -137,27 +126,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void convertirAGris(){
+        // Obtener el drawable del ImageView
+        Drawable drawable = imageView.getDrawable();
+        // Convertir el drawable a un bitmap
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
         // Convertir la imagen a escala de grises
         Mat matGray = new Mat();
-        Imgproc.cvtColor(mat, matGray, Imgproc.COLOR_BGR2GRAY);
+        Utils.bitmapToMat(bitmap, matGray);
+        Imgproc.cvtColor(matGray, matGray, Imgproc.COLOR_BGR2GRAY);
 
         // Convertir la matriz de OpenCV a un bitmap
-        Bitmap grayBitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.RGB_565);
+        Bitmap grayBitmap = Bitmap.createBitmap(matGray.cols(), matGray.rows(), Bitmap.Config.RGB_565);
         Utils.matToBitmap(matGray, grayBitmap);
-
         imageView.setImageBitmap(grayBitmap);
     }
     public void convertirABinaria(View view){
-        // Convertir la imagen a escala de grises
+        // Obtener el drawable del ImageView
+        Drawable drawable = imageView.getDrawable();
+        // Convertir el drawable a un bitmap
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        // Convertir el bitmap a una matriz de OpenCV en escala de grises
         Mat matGray = new Mat();
-        Imgproc.cvtColor(mat, matGray, Imgproc.COLOR_BGR2GRAY);
-
+        Utils.bitmapToMat(bitmap, matGray);
+        Imgproc.cvtColor(matGray, matGray, Imgproc.COLOR_BGR2GRAY);
         // Aplicar umbralización para convertir a una imagen binaria
         Mat binaryImage = new Mat();
         Imgproc.threshold(matGray, binaryImage, 128, 255, Imgproc.THRESH_BINARY);
-
         // Convertir la matriz de OpenCV a un bitmap
-        Bitmap binaryBitmap  = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.RGB_565);
+        Bitmap binaryBitmap  = Bitmap.createBitmap(binaryImage.cols(), binaryImage.rows(), Bitmap.Config.RGB_565);
         Utils.matToBitmap(binaryImage, binaryBitmap );
 
         imageView.setImageBitmap(binaryBitmap);
@@ -206,36 +202,32 @@ public class MainActivity extends AppCompatActivity {
         imageView.setImageBitmap(blueBitmap);
     }
     public void detectarContornos(View view){
-
-// Convertir el bitmap a una matriz de OpenCV
+        // Convertir el bitmap a una matriz de OpenCV
         Mat image = new Mat();
         Utils.bitmapToMat(bitmap, image);
 
-// Convertir la imagen a escala de grises
+        // Convertir la imagen a escala de grises
         Mat grayImage = new Mat();
         Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
 
-// Aplicar un umbral para obtener una imagen binaria
+        // Aplicar un umbral para obtener una imagen binaria
         Mat binaryImage = new Mat();
         Imgproc.threshold(grayImage, binaryImage, 0, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
 
-// Encontrar los contornos en la imagen binaria
+        // Encontrar los contornos en la imagen binaria
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         Imgproc.findContours(binaryImage, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
-// Dibujar los contornos en la imagen original
+        // Dibujar los contornos en la imagen original
         Mat resultImage = image.clone();
         Imgproc.drawContours(resultImage, contours, -1, new Scalar(0, 255, 0), 2);
 
-// Mostrar la imagen con los contornos
+        // Mostrar la imagen con los contornos
         Bitmap resultBitmap = Bitmap.createBitmap(resultImage.cols(), resultImage.rows(), Bitmap.Config.RGB_565);
         Utils.matToBitmap(resultImage, resultBitmap);
         imageView.setImageBitmap(resultBitmap);
-
     }
-
-
     public void rotarImagen(View view) {
 
         // Especifica el ángulo de rotación deseado (en grados)
@@ -250,7 +242,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void pantalla_2 (View view){
         //setContentView(R.layout.activity_main2);
-
     }
 
     public void objetosRed(View view) {
@@ -280,8 +271,6 @@ public class MainActivity extends AppCompatActivity {
     public void objetosGreen(View view) {
         Mat img=new Mat();
         Utils.bitmapToMat(bitmap, img);
-        Mat rgb_img = new Mat();
-        Imgproc.cvtColor(img, rgb_img, Imgproc.COLOR_BGR2RGB);
 
         Mat hsv_img = new Mat();
         Imgproc.cvtColor(img, hsv_img, Imgproc.COLOR_BGR2HSV);
@@ -293,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
         Core.inRange(hsv_img, min_verde, max_verde, mascara_verde);
 
         Mat objetos_verdes = new Mat();
-        Core.bitwise_and(rgb_img, rgb_img, objetos_verdes, mascara_verde);
+        Core.bitwise_and(img, img, objetos_verdes, mascara_verde);
 
         // Ahora puedes hacer lo que desees con los resultados (objetos_rojos, objetos_verdes, objetos_azules)
         // Por ejemplo, convertirlos a Bitmap y mostrarlos en un ImageView:
@@ -324,6 +313,31 @@ public class MainActivity extends AppCompatActivity {
         Bitmap resultBitmapAzul = Bitmap.createBitmap(objetos_azules.cols(), objetos_azules.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(objetos_azules, resultBitmapAzul);
         imageView.setImageBitmap(resultBitmapAzul);
+    }
+    public void escalarImagen(View view){
+        int width = imageView.getWidth();
+        int height = imageView.getHeight();
+        Drawable drawable = imageView.getDrawable();
+        // Convertir el drawable a un bitmap
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+
+        Mat image = new Mat();
+
+        Utils.bitmapToMat(bitmap, image);
+
+        // Define el tamaño deseado para la imagen escalada
+        Size newSize = new Size(width/2, height/2);
+
+        // Crea una matriz de destino para la imagen escalada
+        Mat scaledImage = new Mat(newSize, image.type());
+
+        // Redimensiona la imagen utilizando la interpolación INTER_CUBIC
+        Imgproc.resize(image, scaledImage, newSize, 25, 1, Imgproc.INTER_CUBIC);
+        Bitmap imagenEscalada = Bitmap.createBitmap(scaledImage.cols(), scaledImage.rows(), Bitmap.Config.RGB_565);
+        Utils.matToBitmap(scaledImage, imagenEscalada);
+        imageView.setImageBitmap(imagenEscalada);
+
+        //imageEscalada = cv2.resize(image,(800,400),interpolation=cv2.INTER_CUBIC)
     }
 
 
