@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ProcesaImagenes</string>
+    <string name="app_name">ProcesamientoImagen</string>
+    <string name="select">Canales RGB</string>
 </resources>

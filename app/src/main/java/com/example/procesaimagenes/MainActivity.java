@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,9 +16,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
@@ -44,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.otra_ventana);
+        //setContentView(R.layout.activity_main);
         imageView = findViewById(R.id.imageView);
 
         if (OpenCVLoader.initDebug()) Log.d("LOADED", "success");
@@ -52,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         getPermission();
 
-        camara = findViewById(R.id.camara);
-        select = findViewById(R.id.select);
+        camara = findViewById(R.id.camara1);
+        select = findViewById(R.id.select1);
         imageView = findViewById(R.id.imageView);
 
-        btnGray = findViewById(R.id.btnConvertToGray);
+        btnGray = findViewById(R.id.btn_gris);
 
         select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==SELECT_CODE && data!=null){
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),data.getData());
-                imageView.setImageBitmap(bitmap);
+                    imageView.setImageBitmap(bitmap);
 
                 mat = new Mat(); //Mat es una estructura de datos utilizada para representar matrices multidimensionales
 
@@ -338,6 +344,9 @@ public class MainActivity extends AppCompatActivity {
         imageView.setImageBitmap(imagenEscalada);
 
         //imageEscalada = cv2.resize(image,(800,400),interpolation=cv2.INTER_CUBIC)
+    }
+    public void mostrarOriginal(View view){
+        imageView.setImageBitmap(bitmap);
     }
 
 

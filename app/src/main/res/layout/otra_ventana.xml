@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="32dp"
+        android:background="#000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/camara1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/camara1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="Camara"
+        app:layout_constraintBaseline_toBaselineOf="@+id/select1"
+        app:layout_constraintEnd_toStartOf="@+id/select1"
+        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/select1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="72dp"
+        android:text="Galeria"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="364dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/botton_icons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/camara1">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="417dp"
+            android:layout_height="331dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.615"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:baselineAligned="false"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgroj"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/rojo"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_rojo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="canalRojo"
+                                android:text="Rojo"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="10dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVerde"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/verde"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_Verde"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="canalVerde"
+                                android:text="Verde"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="10dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgAzul"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/azul"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_azul"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="canalAzul"
+                                android:text="Azul"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16sp"
+                            android:orientation="vertical">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgBinaria"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/binaria"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_binaria"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="convertirABinaria"
+                                android:text="Binaria"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="16dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgGris"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:srcCompat="@drawable/gris"
+                                    tools:layout_editor_absoluteX="-2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_gris"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:text="Gris"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:orientation="vertical">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgObRojo"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/pngegg"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_obrojo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="objetosBlue"
+                                android:text="Ob Rojos"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="10dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgObVerde"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/obverdes"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_bVerde"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="objetosGreen"
+                                android:text="Ob Verdes"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="10dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgObAzul"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/obazules"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_obAzules"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="objetosRed"
+                                android:text="Ob Azules"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16sp"
+                            android:orientation="vertical">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgContorno"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/contorno"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_Contorno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="detectarContornos"
+                                android:text="Contorno"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            tools:layout_margin="16dp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgRotar"
+                                    android:layout_width="104dp"
+                                    android:layout_height="73dp"
+                                    app:srcCompat="@drawable/gris"
+                                    tools:layout_editor_absoluteX="-2dp"
+                                    tools:layout_editor_absoluteY="2dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <Button
+                                android:id="@+id/btn_Rotar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="#FFFFFFFF"
+                                android:onClick="rotarImagen"
+                                android:text="Rotar"
+                                android:textAlignment="center"
+                                android:textColor="#34346E" />
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <Button
+                                    android:id="@+id/regresar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:onClick="mostrarOriginal"
+                                    android:text="Original"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    tools:layout_editor_absoluteY="0dp" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+                    </TableRow>
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
