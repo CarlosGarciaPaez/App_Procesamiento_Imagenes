@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,14 +43,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button select,camara,btnGray;
+    Button select,camara,btnGray, btnRegresar;
     ImageView imageView;
     Bitmap bitmap;
     Mat mat, matGray;
+    private int selectedX = 0;
+    private int selectedY = 0;
     int SELECT_CODE = 100, CAMERA_CODE=101;
     private Button colorButton;
     private int selectedColor = 0;
     private Button highlightButton;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
 
         btnGray = findViewById(R.id.btn_gris);
+        btnRegresar = findViewById(R.id.btnRegresarInicio);
 
         select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +98,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void regresarInicio(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    //Menú
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_items, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.item1){
+            setContentView(R.layout.activity_info);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -113,6 +142,14 @@ public class MainActivity extends AppCompatActivity {
             mat = new Mat();
             Utils.bitmapToMat(bitmap,mat);
         }
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                selectedX = (int) event.getX();
+                selectedY = (int) event.getY();
+                return true;
+            }
+        });
     }
     void getPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -131,6 +168,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    public void obtenerColorRGB(View view) {
+        if (bitmap != null) {
+            int pixel = bitmap.getPixel(selectedX, selectedY);
+
+            int red = Color.red(pixel);
+            int green = Color.green(pixel);
+            int blue = Color.blue(pixel);
+
+            String colorRGB = "RGB: " + blue + ", " + green + ", " + red;
+            Toast.makeText(this, colorRGB, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void convertirAGris(){
         // Obtener el drawable del ImageView
         Drawable drawable = imageView.getDrawable();
